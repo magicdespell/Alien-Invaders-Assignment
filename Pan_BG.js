@@ -15,10 +15,31 @@ function init() {
 var imageRepository = new function() {
 	// Define images
 	this.background = new Image();
+	this.spaceship = new Image();
+	this.bullet = new Image();
+	// Ensure all images have loaded before starting the game
+	var numImages = 3;
+	var numLoaded = 0;
+	function imageLoaded() {
+		numLoaded++;
+		if (numLoaded === numImages) {
+			window.init();
+		}
+	}
+	this.background.onload = function() {
+		imageLoaded();
+	}
+	this.spaceship.onload = function() {
+		imageLoaded();
+	}
+	this.bullet.onload = function() {
+		imageLoaded();
+	}
 	// Set images src
 	this.background.src = "imgs/bg.png";
+	this.spaceship.src = "imgs/ship.png";
+	this.bullet.src = "imgs/bullet.png";
 }
-
 /**
  * Creates the Drawable object which will be the base class for
  * all drawable objects in the game. Sets up default variables
